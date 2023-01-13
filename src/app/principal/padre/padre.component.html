@@ -1,0 +1,44 @@
+<section class="container">
+    <form [formGroup]="registroForm" (ngSubmit)="Enviar()">
+        <h1>Registro de Personas</h1>
+
+        <section class="form-group m-3">
+            <label for="nombres">Nombre: </label>
+            <input type="text" class="form-control" formControlName="nombres" required>
+            <section *ngIf="nombres?.invalid && (nombres?.dirty || nombres?.touched)">
+                <section *ngIf="nombres?.errors?.['required']" class="alert alert-success">
+                    El Nombre Completo es obligatorio
+                </section>
+            </section>
+        </section>
+
+        <section class="form-group m-3">
+            <label for="dni">Dni: </label>
+            <input type="text" maxlength="8" class="form-control" 
+            formControlName="dni" required>
+            <section *ngIf="dni?.invalid && (dni?.dirty || dni?.touched)">
+                <section *ngIf="dni?.errors?.['pattern']" class="alert alert-success">
+                    El DNI debe ser solo 8 digitos
+                </section>
+            </section>
+        </section>
+
+        <section class="form-group m-3">
+            <label for="estadocivil">Estado Civil: </label>
+            <select class="col-3 form-control" 
+            
+            formControlName="estadocivil" name="estadocivil" id="estadocivil" required>
+              <option value="soltera">Soltera</option>
+              <option value="casada">Casada</option>
+              <option value="divorciada">Divorciada</option>
+              <option value="conviviente">Conviviente</option>
+            </select>
+        </section>
+
+        <section>
+            <button type="submit" class="btn btn-success m-1" [disabled]="botonDeshabilitado" (click)="mostrar=true">Enviar</button>
+        </section>
+        
+    </form>
+    <app-hijo *ngIf="mostrar" [mensaje_padre]="datos_padre"></app-hijo>
+</section>
